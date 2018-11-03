@@ -23,6 +23,15 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    gamescene.cpp \
+    gameview.cpp \
+    bird.cpp \
+    pipe.cpp
 
-HEADERS  +=
+HEADERS  += \
+    gamescene.h \
+    gameview.h \
+    bird.h \
+    pipe.h \
+    game.h

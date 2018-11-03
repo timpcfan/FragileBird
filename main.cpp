@@ -3,9 +3,17 @@
 #include <QApplication>
 #include <QDebug>
 
+#include "gamescene.h"
+#include "gameview.h"
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
+
+    GameScene gs;
+    GameView gv(&gs);
+    gv.show();
+
 
     return a.exec();
 }
