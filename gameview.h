@@ -1,6 +1,6 @@
 #ifndef GAMEVIEW_H
 #define GAMEVIEW_H
-
+//u
 #include <QObject>
 #include <QWidget>
 #include <QGraphicsView>
