@@ -66,7 +66,7 @@ void Pipe::advance(int phase)
         return;
 
     if(last_time == 0){
-        last_time = clock();
+        last_time = QDateTime::currentDateTime().toMSecsSinceEpoch();
         return;
     }
 
@@ -84,7 +84,7 @@ void Pipe::advance(int phase)
 
 
     // 计算经过的时间
-    time_t cur_time = clock();
+    uint cur_time = QDateTime::currentDateTime().toMSecsSinceEpoch();
     qreal pass_time = (cur_time - last_time) / 1000.;
     last_time = cur_time;
 //    qDebug() << "pass_time:" << pass_time << "; cur_pos:" << pos();

@@ -40,7 +40,7 @@ void Bird::advance(int phase)
         return;
 
     if(last_time == 0){
-        last_time = clock();
+        last_time = QDateTime::currentDateTime().toMSecsSinceEpoch();
         return;
     }
 
@@ -52,7 +52,7 @@ void Bird::advance(int phase)
         emit clashed();
 
     // 计算经过的时间
-    time_t cur_time = clock();
+    uint cur_time = QDateTime::currentDateTime().toMSecsSinceEpoch();
     qreal pass_time = (cur_time - last_time) / 1000.;
     last_time = cur_time;
 //    qDebug() << "pass_time:" << pass_time << "; cur_pos:" << pos() << "; yspeed:" << yspeed;
@@ -62,7 +62,7 @@ void Bird::advance(int phase)
     qreal dy = yspeed * pass_time;
 
     // 计算新速度
-    yspeed += gravity * pass_time;
+    yspeed += dynamicGravity() * pass_time;
 
     // 移动
     moveBy(dx, dy);

@@ -7,9 +7,9 @@
 #include <QPainter>
 #include <QDebug>
 #include <QPair>
+#include <QDateTime>
 
 #include <typeinfo>
-#include <time.h>
 
 #include "bird.h"
 #include "game.h"
@@ -44,7 +44,7 @@ private:
     qreal width;            // 管子的宽度
     qreal height;           // 管子的高度
     qreal xspeed = -250;    // 管子移动速度
-    time_t last_time = 0;   // 上次更新的时间（用于速度计算）
+    uint last_time = 0;   // 上次更新的时间（用于速度计算）
     bool isPassed = false;
 };
 
