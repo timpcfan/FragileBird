@@ -34,4 +34,5 @@ HEADERS  += \
     gameview.h \
     bird.h \
     pipe.h \
-    game.h
+    game.h \
+    testpush.h
