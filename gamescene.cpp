@@ -28,16 +28,19 @@ void GameScene::createBird()
 void GameScene::createRandomPipePair(qreal speed, qreal gapWidth, qreal pipeWidth, qreal gapSpawnRange)
 {
     const qreal adjust = 30;
-    QPair<Pipe*, Pipe*> p = Pipe::makePairPipe(SCREEN_WIDTH + adjust,
-                                               - gapWidth / 2 - gapSpawnRange / 2 + (qrand() % int(gapSpawnRange)),
-                                               gapWidth, pipeWidth);
+    qreal gapx = SCREEN_WIDTH + adjust;
+    qreal gapy = - gapWidth / 2 - gapSpawnRange / 2 + (qrand() % int(gapSpawnRange));
+
+    QPair<Pipe*, Pipe*> p = Pipe::makePairPipe(gapx, gapy, gapWidth, pipeWidth);
     p.first->setSpeed(speed);
     p.second->setSpeed(speed);
     connect(p.first, SIGNAL(leavingScreen(Pipe*)), this, SLOT(removeFromPipeGroup(Pipe*)));
     connect(p.second, SIGNAL(leavingScreen(Pipe*)), this, SLOT(removeFromPipeGroup(Pipe*)));
-    connect(p.second, SIGNAL(birdPassed()), this, SIGNAL(addScore()));
+    connect(p.second, SIGNAL(birdPassed()), this, SLOT(birdPassed()));
     pipe_group->addToGroup(p.first);
     pipe_group->addToGroup(p.second);
+
+    gaps.append(GameData::GapData{gapx, gapy, gapWidth, pipeWidth, speed});
 }
 
 void GameScene::clear()
@@ -57,6 +60,7 @@ void GameScene::clear()
     scoreDisplay = new QGraphicsTextItem;
     scoreDisplay->setPos(LEFT, ROOF);
     addItem(scoreDisplay);
+    gaps.clear();
 }
 
 void GameScene::mainScreen()
@@ -92,6 +96,16 @@ void GameScene::updateScoreDisplay(int score)
     scoreDisplay->setPlainText(QString(s));
 }
 
+GameData GameScene::gatherInfomation()
+{
+    GameData d;
+    if(mbird)
+        d.bird = mbird->getInfo();
+    if(!gaps.isEmpty())
+        d.gap = gaps.first();
+    return d;
+}
+
 void GameScene::removeFromPipeGroup(Pipe *p)
 {
     pipe_group->removeFromGroup(p);
@@ -101,6 +115,12 @@ void GameScene::removeFromPipeGroup(Pipe *p)
 void GameScene::birdClashed()
 {
     emit gameover();
+}
+
+void GameScene::birdPassed()
+{
+    emit addScore();
+    gaps.removeFirst();
 }
 
 Bird *GameScene::bird() const

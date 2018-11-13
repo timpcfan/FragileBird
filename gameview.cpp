@@ -31,6 +31,13 @@ GameView::~GameView()
     delete animateTimer;
 }
 
+GameData GameView::getAllData()
+{
+    GameData data = gscene->gatherInfomation();
+    data.game = GameData::GameSetting{spawnInterval};
+    return data;
+}
+
 void GameView::restart()
 {
     gscene->clear();

@@ -5,6 +5,7 @@
 
 #include "gamescene.h"
 #include "gameview.h"
+#include "hud.h"
 
 int main(int argc, char *argv[])
 {
@@ -14,6 +15,8 @@ int main(int argc, char *argv[])
     GameView gv(&gs);
     gv.show();
 
-
+    HUD hud;
+    hud.setGameView(&gv);
+    hud.show();
     return a.exec();
 }

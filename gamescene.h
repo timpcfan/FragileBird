@@ -30,6 +30,7 @@ public:
     void gameoverScreen(int score);
     void startHint();
     void updateScoreDisplay(int score);
+    GameData gatherInfomation();
 
 signals:
     void gameover();
@@ -38,9 +39,11 @@ signals:
 public slots:
     void removeFromPipeGroup(Pipe *p);
     void birdClashed();
+    void birdPassed();
 
 private:
 
+    QList<GameData::GapData> gaps; // 保存还没消亡的所有裂缝信息
     Bird* mbird = nullptr;
     QGraphicsItemGroup* pipe_group = nullptr;
     QGraphicsTextItem* scoreDisplay;
