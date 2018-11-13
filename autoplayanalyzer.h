@@ -17,7 +17,7 @@ class AutoPlayAnalyzer : public QObject
 
 public:
     AutoPlayAnalyzer();
-    bool canJump(GameData data); // 是否可以
+    bool canJump(GameData data); // 根据游戏信息判断是否可以跳跃
 
 public slots:
 //    void feedback(GameData data, bool result);
