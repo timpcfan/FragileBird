@@ -8,6 +8,7 @@
 #include <QList>
 #include <QTimer>
 #include <QDebug>
+#include <QPair>
 
 #include "bird.h"
 #include "pipe.h"
@@ -43,7 +44,7 @@ public slots:
 
 private:
 
-    QList<GameData::GapData> gaps; // 保存还没消亡的所有裂缝信息
+    QList<QPair<GameData::GapData, Pipe*>> gapsAndPies; // 保存还没消亡的所有裂缝信息
     Bird* mbird = nullptr;
     QGraphicsItemGroup* pipe_group = nullptr;
     QGraphicsTextItem* scoreDisplay;

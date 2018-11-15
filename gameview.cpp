@@ -55,6 +55,12 @@ void GameView::keyPressEvent(QKeyEvent *event)
         }
         gscene->bird()->jump();
         break;
+    case Qt::Key_Q:
+        isStart = false;
+        break;
+    case Qt::Key_W:
+        isStart = true;
+        break;
     case Qt::Key_R:
         restart();
     default:

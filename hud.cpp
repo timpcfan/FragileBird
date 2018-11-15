@@ -23,5 +23,5 @@ void HUD::setGameView(GameView *gv)
     this->gv = gv;
     QTimer * t = new QTimer(this);
     connect(t, SIGNAL(timeout()), this, SLOT(updateText()));
-    t->start(200);
+    t->start(100);
 }

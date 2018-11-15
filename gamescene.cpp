@@ -40,7 +40,7 @@ void GameScene::createRandomPipePair(qreal speed, qreal gapWidth, qreal pipeWidt
     pipe_group->addToGroup(p.first);
     pipe_group->addToGroup(p.second);
 
-    gaps.append(GameData::GapData{gapx, gapy, gapWidth, pipeWidth, speed});
+    gapsAndPies.append(QPair<GameData::GapData, Pipe*>(GameData::GapData{gapx, gapy, gapWidth, pipeWidth, speed}, p.first));
 }
 
 void GameScene::clear()
@@ -60,7 +60,7 @@ void GameScene::clear()
     scoreDisplay = new QGraphicsTextItem;
     scoreDisplay->setPos(LEFT, ROOF);
     addItem(scoreDisplay);
-    gaps.clear();
+    gapsAndPies.clear();
 }
 
 void GameScene::mainScreen()
@@ -101,8 +101,14 @@ GameData GameScene::gatherInfomation()
     GameData d;
     if(mbird)
         d.bird = mbird->getInfo();
-    if(!gaps.isEmpty())
-        d.gap = gaps.first();
+    else
+        d.bird = GameData::BirdData{};
+    if(!gapsAndPies.isEmpty()){
+        auto info = gapsAndPies.first();
+        d.gap = info.first;
+        d.gap.gapx = info.second->x();
+    }else
+        d.gap = GameData::GapData{};
     return d;
 }
 
@@ -120,7 +126,7 @@ void GameScene::birdClashed()
 void GameScene::birdPassed()
 {
     emit addScore();
-    gaps.removeFirst();
+    gapsAndPies.removeFirst();
 }
 
 Bird *GameScene::bird() const
