@@ -40,7 +40,7 @@ private:
     qreal xspeed = 0;                       // x方向速度(px/s)
     qreal yspeed = 0;                       // y方向速度(px/s)
     uint last_time = 0;                     // 上次更新的时间（用于速度计算）
-    qreal direction(){return 1/(1+exp(-yspeed/150. + 1)) * 170 - 85;}     // 小鸟的朝向(-85~85)
+    qreal direction(){return 1/(1+exp(-yspeed/150. + 1)) * 90 - 45;}     // 小鸟的朝向(-45~45)
     qreal dynamicGravity(){return (1 + qAbs(yspeed)/1000) * baseGravity;} // 小鸟向下的加速度
 };
 

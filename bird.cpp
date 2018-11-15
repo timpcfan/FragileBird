@@ -30,8 +30,9 @@ QPainterPath Bird::shape() const
 
 void Bird::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    painter->setBrush(Qt::blue);
-    painter->drawEllipse(-BirdWidth / 2, -BirdHeight / 2, BirdWidth, BirdHeight);
+    painter->drawImage(boundingRect().topLeft(), QImage(":/new/images/images/bird1_0.png"));
+//    painter->setBrush(Qt::blue);
+//    painter->drawEllipse(-BirdWidth / 2, -BirdHeight / 2, BirdWidth, BirdHeight);
 }
 
 void Bird::advance(int phase)

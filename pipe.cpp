@@ -39,8 +39,9 @@ void Pipe::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
             collided = true;
     }
     painter->setBrush(collided ? Qt::red : Qt::black);
-    painter->drawRect(0, caph, width, height - caph);
-    painter->drawRect(-capw, 0, width + 2 * capw, caph); // 画突出的盖子
+    painter->drawImage(0, 0, QImage(":/new/images/images/pipe_up.png"));
+    //painter->drawRect(0, caph, width, height - caph);
+    //painter->drawRect(-capw, 0, width + 2 * capw, caph); // 画突出的盖子
 
 }
 

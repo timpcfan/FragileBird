@@ -18,6 +18,11 @@ GameScene::~GameScene()
 
 }
 
+void GameScene::drawBackground(QPainter *painter, const QRectF &rect)
+{
+    painter->drawImage(0, ROOF, QImage(":/new/images/images/bg_day.png"));
+}
+
 void GameScene::createBird()
 {
     mbird = new Bird(BIRD_INIT_X, BIRD_INIT_Y);

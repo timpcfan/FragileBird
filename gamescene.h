@@ -30,6 +30,8 @@ public:
     void gameoverScreen(int score);
     void startHint();
     void updateScoreDisplay(int score);
+    void drawBackground(QPainter *painter, const QRectF & rect) override;
+
 
 signals:
     void gameover();

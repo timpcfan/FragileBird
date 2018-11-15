@@ -35,3 +35,6 @@ HEADERS  += \
     bird.h \
     pipe.h \
     game.h
+
+RESOURCES += \
+    src.qrc
