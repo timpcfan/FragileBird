@@ -53,8 +53,7 @@ private:
     const int fps = 60;
     int score = 0;
 
-    AutoPlayAnalyzer analyzer;
-    GameData data;
+    AutoPlayAnalyzer *analyzer;
 };
 
 #endif // GAMEVIEW_H
