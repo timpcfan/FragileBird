@@ -15,8 +15,8 @@ int main(int argc, char *argv[])
     GameView gv(&gs);
     gv.show();
 
-    HUD hud;
-    hud.setGameView(&gv);
-    hud.show();
+//    HUD hud;
+//    hud.setGameView(&gv);
+//    hud.show();
     return a.exec();
 }
