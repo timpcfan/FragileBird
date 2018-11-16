@@ -36,6 +36,22 @@ void Bird::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 //    painter->drawEllipse(-BirdWidth / 2, -BirdHeight / 2, BirdWidth, BirdHeight);
 }
 
+GameData::BirdData Bird::getInfo()
+{
+    return GameData::BirdData{
+        BirdWidth,
+        BirdHeight,
+        jumpspeed,
+        baseGravity,
+        xspeed,
+        yspeed,
+        direction(),
+        dynamicGravity(),
+        x(),
+        y()
+    };
+}
+
 void Bird::advance(int phase)
 {
     if(phase == 0)

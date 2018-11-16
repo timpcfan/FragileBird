@@ -37,13 +37,8 @@ HEADERS  += \
     bird.h \
     pipe.h \
     game.h \
-    game.h \
     autoplayanalyzer.h \
     hud.h
-
-RESOURCES += \
-    src.qrc
-
 
 FORMS += \
     hud.ui

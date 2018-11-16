@@ -27,23 +27,11 @@ SOURCES += main.cpp \
     gamescene.cpp \
     gameview.cpp \
     bird.cpp \
-    pipe.cpp \
-    autoplayanalyzer.cpp \
-    hud.cpp
+    pipe.cpp
 
 HEADERS  += \
     gamescene.h \
     gameview.h \
     bird.h \
     pipe.h \
-    game.h \
-    game.h \
-    autoplayanalyzer.h \
-    hud.h
-
-RESOURCES += \
-    src.qrc
-
-
-FORMS += \
-    hud.ui
+    game.h

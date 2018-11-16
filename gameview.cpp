@@ -23,11 +23,23 @@ GameView::GameView(GameScene *gs) : QGraphicsView(gs)
 
     gscene->mainScreen();
     isMainScreen = true;
+
+    // 自动跳跃分析器
+    analyzer = new AutoPlayAnalyzer();
 }
 
 GameView::~GameView()
 {
     delete animateTimer;
+    delete pipeGenerateTimer;
+    delete analyzer;
+}
+
+GameData GameView::getAllData()
+{
+    GameData data = gscene->gatherInfomation();
+    data.game = GameData::GameSetting{spawnInterval};
+    return data;
 }
 
 void GameView::restart()
@@ -46,6 +58,12 @@ void GameView::keyPressEvent(QKeyEvent *event)
             break;
         }
         gscene->bird()->jump();
+        break;
+    case Qt::Key_A:
+        isAutoPlay = true;
+        break;
+    case Qt::Key_S:
+        isAutoPlay = false;
         break;
     case Qt::Key_R:
         restart();
@@ -68,6 +86,8 @@ void GameView::gameAdvance()
     if(!isStart)
         return;
     gscene->advance();
+    if(isAutoPlay && analyzer->canJump(getAllData()))
+        gscene->bird()->jump();
 }
 
 void GameView::startGame()

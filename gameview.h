@@ -1,6 +1,6 @@
 #ifndef GAMEVIEW_H
 #define GAMEVIEW_H
-
+//u
 #include <QObject>
 #include <QWidget>
 #include <QGraphicsView>
@@ -14,6 +14,7 @@
 #include "bird.h"
 #include "pipe.h"
 #include "game.h"
+#include "autoplayanalyzer.h"
 
 class GameView : public QGraphicsView
 {
@@ -22,6 +23,7 @@ class GameView : public QGraphicsView
 public:
     GameView(GameScene *scene);
     ~GameView();
+    GameData getAllData();
 
     void restart();
 
@@ -42,12 +44,16 @@ private:
 
     bool isStart = false; // 游戏是否开始
     bool isMainScreen = false; // 是否在开始界面
+    bool isAutoPlay = false;  // 是否开启自动跳跃
+    bool isLearning = false;  // 是否为学习模式
 
     GameScene* gscene;
     QTimer* animateTimer;
     QTimer* pipeGenerateTimer;
     const int fps = 60;
     int score = 0;
+
+    AutoPlayAnalyzer *analyzer;
 };
 
 #endif // GAMEVIEW_H

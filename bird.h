@@ -10,6 +10,9 @@
 #include "game.h"
 #include "math.h"
 #include "pipe.h"
+#include "autoplayanalyzer.h"
+
+// test div
 
 class Bird : public QObject, public QGraphicsItem
 {
@@ -23,6 +26,7 @@ public:
     QPainterPath shape() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
                QWidget *widget) override;
+    GameData::BirdData getInfo();
 
 protected:
     void advance(int phase) override;

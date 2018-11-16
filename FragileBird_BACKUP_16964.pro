@@ -36,14 +36,16 @@ HEADERS  += \
     gameview.h \
     bird.h \
     pipe.h \
-    game.h \
+<<<<<<< HEAD
+    game.h
+
+RESOURCES += \
+    src.qrc
+=======
     game.h \
     autoplayanalyzer.h \
     hud.h
 
-RESOURCES += \
-    src.qrc
-
-
 FORMS += \
     hud.ui
+>>>>>>> refs/heads/div_tzj
