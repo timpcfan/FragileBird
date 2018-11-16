@@ -24,7 +24,7 @@ public:
     QGraphicsItemGroup* pipes() const;
 
     void createBird();           // 生成鸟
-    void createRandomPipePair(qreal speed=100, qreal gapWidth=110, qreal pipeWidth=60, qreal gapSpawnRange=400); // 随机生成管子对
+    void createRandomPipePair(qreal speed=100, qreal gapWidth=110, qreal pipeWidth=68, qreal gapSpawnRange=400); // 随机生成管子对
     void clear();   // 清空scene
     void mainScreen();
     void gameoverScreen(int score);
@@ -46,6 +46,8 @@ private:
     Bird* mbird = nullptr;
     QGraphicsItemGroup* pipe_group = nullptr;
     QGraphicsTextItem* scoreDisplay;
+
+    QImage* bgImage;
 };
 
 #endif // GAMESCENE_H

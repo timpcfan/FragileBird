@@ -11,16 +11,19 @@ GameScene::GameScene() : QGraphicsScene()
     scoreDisplay = new QGraphicsTextItem;
     scoreDisplay->setPos(LEFT, ROOF);
     addItem(scoreDisplay);
+
+    bgImage = new QImage(":/new/images/images/bg_day.png");
 }
 
 GameScene::~GameScene()
 {
-
+    delete bgImage;
 }
 
 void GameScene::drawBackground(QPainter *painter, const QRectF &rect)
 {
-    painter->drawImage(0, ROOF, QImage(":/new/images/images/bg_day.png"));
+    const qreal adjust = 5;
+    painter->drawImage(0 - adjust, ROOF - adjust, *bgImage);
 }
 
 void GameScene::createBird()

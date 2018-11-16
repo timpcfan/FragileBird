@@ -20,9 +20,8 @@ class Pipe : public QObject, public QGraphicsItem
     Q_INTERFACES(QGraphicsItem)
 
 public:
-    Pipe();
-    ~Pipe();
     Pipe(qreal x, qreal y, qreal w, qreal h);
+    ~Pipe();
     QRectF boundingRect() const override;
     QPainterPath shape() const override;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *option,
@@ -39,6 +38,7 @@ signals:
     void birdPassed();
 
 private:
+    QPixmap* pipePixmap;
     const qreal caph = 20;  // 管道盖子的高度
     const qreal capw = 4;   // 管道盖子边沿宽度
     qreal width;            // 管子的宽度

@@ -34,7 +34,8 @@ public slots:
     void jump();
 
 private:
-    enum {BirdWidth = 36, BirdHeight = 30}; // 小鸟的宽高
+    QPixmap* birdPixmap;
+    enum {BirdWidth = 34, BirdHeight = 24}; // 小鸟的宽高
     const qreal jumpspeed = 500;            // 跳跃瞬间的速度
     const qreal baseGravity = 1500;         // 重力加速度(px/s2)
     qreal xspeed = 0;                       // x方向速度(px/s)

@@ -1,12 +1,5 @@
 #include "pipe.h"
 
-Pipe::Pipe()
-{
-}
-
-Pipe::~Pipe()
-{
-}
 
 Pipe::Pipe(qreal x, qreal y, qreal w, qreal h)
 {
@@ -14,11 +7,18 @@ Pipe::Pipe(qreal x, qreal y, qreal w, qreal h)
     width = w;
     height = h;
     setTransformOriginPoint(w/2, h/2);
+
+    pipePixmap = new QPixmap(":/new/images/images/pipe_up.png");
+}
+
+Pipe::~Pipe()
+{
+    delete pipePixmap;
 }
 
 QRectF Pipe::boundingRect() const
 {
-    const qreal adjust = capw + 0.5;
+    const qreal adjust = capw + 5;
     return QRectF(0 - adjust, 0 - adjust, width + 2 * adjust, height + 2 * adjust);
 }
 
@@ -31,17 +31,19 @@ QPainterPath Pipe::shape() const
 
 void Pipe::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    auto its = this->collidingItems();
-    bool collided = false;
-    for(auto i : its)
-    {
-        if(typeid(*i) == typeid(Bird))
-            collided = true;
-    }
-    painter->setBrush(collided ? Qt::red : Qt::black);
-    painter->drawImage(0, 0, QImage(":/new/images/images/pipe_up.png"));
-    //painter->drawRect(0, caph, width, height - caph);
-    //painter->drawRect(-capw, 0, width + 2 * capw, caph); // 画突出的盖子
+    const qreal adjust = 5;
+    painter->drawPixmap(0, 0, width, height + adjust, *pipePixmap, 0, 0, pipePixmap->width(), height + adjust);
+
+//    auto its = this->collidingItems();
+//    bool collided = false;
+//    for(auto i : its)
+//    {
+//        if(typeid(*i) == typeid(Bird))
+//            collided = true;
+//    }
+//    painter->setBrush(collided ? Qt::red : Qt::black);
+//    painter->drawRect(0, caph, width, height - caph);
+//    painter->drawRect(-capw, 0, width + 2 * capw, caph); // 画突出的盖子
 
 }
 

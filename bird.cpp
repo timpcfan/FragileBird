@@ -10,6 +10,7 @@ Bird::Bird() : Bird(0, 0)
 Bird::Bird(qreal x, qreal y)
 {
     setPos(x, y);
+    birdPixmap = new QPixmap(":/new/images/images/bird1_0.png");
 }
 
 QRectF Bird::boundingRect() const
@@ -30,7 +31,7 @@ QPainterPath Bird::shape() const
 
 void Bird::paint(QPainter *painter, const QStyleOptionGraphicsItem *, QWidget *)
 {
-    painter->drawImage(boundingRect().topLeft(), QImage(":/new/images/images/bird1_0.png"));
+    painter->drawPixmap(-BirdWidth / 2, -BirdHeight / 2, BirdWidth, BirdHeight, *birdPixmap);
 //    painter->setBrush(Qt::blue);
 //    painter->drawEllipse(-BirdWidth / 2, -BirdHeight / 2, BirdWidth, BirdHeight);
 }

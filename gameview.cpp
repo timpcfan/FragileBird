@@ -5,8 +5,7 @@ GameView::GameView(GameScene *gs) : QGraphicsView(gs)
     gscene = gs;
 
     setRenderHint(QPainter::Antialiasing);
-//    setBackgroundBrush(...);
-//    setCacheMode(QGraphicsView::CacheBackground);
+    setCacheMode(QGraphicsView::CacheBackground);
     setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
     setWindowTitle(QString("易碎小鸟"));
     resize(355, 605);
