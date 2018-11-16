@@ -134,6 +134,15 @@ void GameScene::birdClashed()
 void GameScene::birdPassed()
 {
     emit addScore();
+    QTimer* tmpTimer = new QTimer();
+    tmpTimer->setSingleShot(true);
+    connect(tmpTimer, SIGNAL(timeout()), this, SLOT(handlePipePassed()));
+    connect(tmpTimer, SIGNAL(timeout()), tmpTimer, SLOT(deleteLater()));
+    tmpTimer->start(180);
+}
+
+void GameScene::handlePipePassed()
+{
     gapsAndPies.removeFirst();
 }
 

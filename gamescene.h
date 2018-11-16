@@ -43,6 +43,7 @@ public slots:
     void removeFromPipeGroup(Pipe *p);
     void birdClashed();
     void birdPassed();
+    void handlePipePassed();
 
 private:
 

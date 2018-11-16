@@ -38,9 +38,11 @@ public slots:
     void addScore();
 
 private:
-    qreal spawnInterval = 2000; // 管子生成间隔(ms)
-    qreal pipeGapWidth = 120; // 上下管子间开口宽度(px)
-    qreal pipeSpeed = 180; // 管子移动速度(px/s)
+    qreal spawnInterval = 1500; // 管子生成间隔(ms)
+    qreal pipeWidth = 68;       // 管子的宽度(px)
+    qreal gapSpawnRange = 300;  // 间隙生成的区间(px)
+    qreal pipeGapWidth = 120;   // 上下管子间开口宽度(px)
+    qreal pipeSpeed = 180;      // 管子移动速度(px/s)
 
     bool isStart = false; // 游戏是否开始
     bool isMainScreen = false; // 是否在开始界面

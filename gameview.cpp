@@ -77,7 +77,7 @@ bool GameView::spawnPipePair()
     if(!isStart)
         return false;
 
-    gscene->createRandomPipePair(pipeSpeed, pipeGapWidth);
+    gscene->createRandomPipePair(pipeSpeed, pipeGapWidth, pipeWidth, gapSpawnRange);
     return true;
 }
 
