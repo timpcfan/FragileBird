@@ -62,8 +62,10 @@ void GameView::keyPressEvent(QKeyEvent *event)
         break;
     case Qt::Key_A:
         isAutoPlay = true;
+        gscene->setAutoPlayTextVisable(true);
         break;
     case Qt::Key_S:
+        gscene->setAutoPlayTextVisable(false);
         isAutoPlay = false;
         break;
     case Qt::Key_R:
@@ -104,7 +106,8 @@ void GameView::startGame()
 void GameView::stopGame()
 {
     isStart = false;
-    gscene->gameoverScreen(score);
+    deadCount ++;
+    gscene->gameoverScreen(score, deadCount > 3);
 }
 
 void GameView::addScore()

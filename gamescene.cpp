@@ -24,6 +24,12 @@ void GameScene::drawBackground(QPainter *painter, const QRectF &)
     painter->drawImage(0 - adjust, ROOF - adjust, *bgImage);
 }
 
+void GameScene::setAutoPlayTextVisable(bool visable)
+{
+    isAutoPlay = visable;
+    autoPlayText->setVisible(isAutoPlay);
+}
+
 void GameScene::createBird()
 {
     mbird = new Bird(BIRD_INIT_X, BIRD_INIT_Y);
@@ -75,13 +81,14 @@ void GameScene::mainScreen()
     p->setPos(LEFT - adjust, ROOF - adjust);
 }
 
-void GameScene::gameoverScreen(int score)
+void GameScene::gameoverScreen(int score, bool showHint)
 {
     disableHint();
     scoreDisplay->setVisible(false);
     auto fbig = QFont(QString("Microsoft YaHei"), 32, QFont::Bold);
     auto fmiddle = QFont(QString("Microsoft YaHei"), 26, QFont::Bold);
     auto fsmall = QFont(QString("Microsoft YaHei"), 18, QFont::Bold);
+    auto ftiny = QFont(QString("Microsoft YaHei"), 12, QFont::Normal);
     auto s1 = QString("游戏结束");
     auto s2 = QString("得分");
     auto s3 = QString("%1").arg(score);
@@ -90,6 +97,11 @@ void GameScene::gameoverScreen(int score)
     putTextByCenterPos(s2, fmiddle, SCREEN_WIDTH / 2, -120);
     putTextByCenterPos(s3, fbig, SCREEN_WIDTH / 2, -50);
     putTextByCenterPos(s4, fsmall, SCREEN_WIDTH / 2, 250);
+
+    if(showHint){
+        putTextByCenterPos(QString("游戏太难？"), ftiny, SCREEN_WIDTH / 2, 50, Qt::red);
+        putTextByCenterPos(QString("按A键试试 : )"), ftiny, SCREEN_WIDTH / 2, 73, Qt::red);
+    }
 
 }
 
@@ -167,6 +179,11 @@ void GameScene::initDisplay()
     scoreDisplay->setPos(SCREEN_WIDTH / 2 - w / 2, ROOF);
     auto f = QFont("Microsoft YaHei", 14, QFont::Normal);
     hintText = putTextByCenterPos(QString("按空格键跳跃，躲避管道"), f, SCREEN_WIDTH / 2, 30, Qt::white);
+    auto f2 = QFont("Microsoft YaHei", 12, QFont::Normal);
+    autoPlayText = addText(QString("AI辅助跳跃已启动"), f2);
+    autoPlayText->setPos(LEFT, ROOF);
+    autoPlayText->setVisible(isAutoPlay);
+    autoPlayText->setDefaultTextColor(Qt::red);
 }
 
 QGraphicsTextItem* GameScene::putTextByCenterPos(QString s, QFont &f, qreal x, qreal y, QColor color)

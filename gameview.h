@@ -54,6 +54,7 @@ private:
     QTimer* pipeGenerateTimer;
     const int fps = 60;
     int score = 0;
+    int deadCount = 0;
 
     AutoPlayAnalyzer *analyzer;
 };
