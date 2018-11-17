@@ -9,6 +9,7 @@
 #include <QTimer>
 #include <QKeyEvent>
 #include <QDebug>
+#include <QIcon>
 
 #include "gamescene.h"
 #include "bird.h"
