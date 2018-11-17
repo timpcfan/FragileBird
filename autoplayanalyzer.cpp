@@ -12,14 +12,15 @@ bool AutoPlayAnalyzer::canJump(GameData data)
     qreal y0 = data.gap.gapy + data.gap.gapw + delta;
     qreal y1 = y0 + dh;
 
-    if(data.bird.y > y1)//底部碰撞检测
+    if(data.bird.y > y1){//底部碰撞检测
         return true;
+    }
     else if(data.bird.x < data.gap.gapx - alpha  && data.bird.y > y0)//状态1 在两个柱子之间维持一个安全高度
     {
         if(rand() % 10000 < calcuP(data) * 10000)
             return true;
     }
-    else if(data.bird.y > data.gap.gapy + data.gap.gapw - beta)//状态二  调整到轨道的高度区域飞行 和 状态三 在管道上面维持跳跃
+    else if(data.bird.x > data.gap.gapx - alpha && data.bird.y > data.gap.gapy + data.gap.gapw - beta)//状态二  调整到轨道的高度区域飞行 和 状态三 在管道上面维持跳跃
     {
         return true;
     }
