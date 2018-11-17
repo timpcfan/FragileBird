@@ -8,9 +8,7 @@ GameScene::GameScene() : QGraphicsScene()
     pipe_group = new QGraphicsItemGroup;
     addItem(pipe_group);
 
-    scoreDisplay = new QGraphicsTextItem;
-    scoreDisplay->setPos(LEFT, ROOF);
-    addItem(scoreDisplay);
+    initScoreDisplay();
 
     bgImage = new QImage(":/new/images/images/bg_day.png");
 }
@@ -20,7 +18,7 @@ GameScene::~GameScene()
     delete bgImage;
 }
 
-void GameScene::drawBackground(QPainter *painter, const QRectF &rect)
+void GameScene::drawBackground(QPainter *painter, const QRectF &)
 {
     const qreal adjust = 5;
     painter->drawImage(0 - adjust, ROOF - adjust, *bgImage);
@@ -65,43 +63,51 @@ void GameScene::clear()
     QGraphicsScene::clear();
     pipe_group = new QGraphicsItemGroup;
     addItem(pipe_group);
-    scoreDisplay = new QGraphicsTextItem;
-    scoreDisplay->setPos(LEFT, ROOF);
-    addItem(scoreDisplay);
+    initScoreDisplay();
     gapsAndPies.clear();
 }
 
 void GameScene::mainScreen()
 {
     clear();
-    auto t = addText(QString("按空格键开始游戏"));
-    t->setPos(100, 0);
+    auto p = addPixmap(QPixmap(":/new/images/images/main.png"));
+    qreal adjust = 5;
+    p->setPos(LEFT - adjust, ROOF - adjust);
 }
 
 void GameScene::gameoverScreen(int score)
 {
-    char* s = new char[100];
-    sprintf(s, "游戏结束，最终得分：%d，按R键重新开始", score);
-    auto t = addText(QString(s));
-    t->setPos(100, 0);
+    scoreDisplay->setVisible(false);
+    auto fbig = QFont(QString("Microsoft YaHei"), 32, QFont::Bold);
+    auto fmiddle = QFont(QString("Microsoft YaHei"), 26, QFont::Bold);
+    auto fsmall = QFont(QString("Microsoft YaHei"), 18, QFont::Bold);
+    auto s1 = QString("游戏结束");
+    auto s2 = QString("得分");
+    auto s3 = QString("%1").arg(score);
+    auto s4 = QString("按R键重新开始");
+    putTextByCenterPos(s1, fbig, SCREEN_WIDTH / 2, -200);
+    putTextByCenterPos(s2, fmiddle, SCREEN_WIDTH / 2, -120);
+    putTextByCenterPos(s3, fbig, SCREEN_WIDTH / 2, -50);
+    putTextByCenterPos(s4, fsmall, SCREEN_WIDTH / 2, 250);
+
 }
 
 void GameScene::startHint()
 {
     QTimer* tmpTimer = new QTimer();
     tmpTimer->setSingleShot(true);
-    auto t = addText(QString("按空格键跳跃，避开水管"));
-    t->setPos(100, 0);
-    connect(tmpTimer, SIGNAL(timeout()), t, SLOT(deleteLater()));
+    auto f = QFont("Microsoft YaHei", 14, QFont::Normal);
+    hintText = putTextByCenterPos(QString("按空格键跳跃，躲避管道"), f, SCREEN_WIDTH / 2, 30, Qt::white);
+    connect(tmpTimer, SIGNAL(timeout()), hintText, SLOT(deleteLater()));
     connect(tmpTimer, SIGNAL(timeout()), tmpTimer, SLOT(deleteLater()));
     tmpTimer->start(2000);
 }
 
 void GameScene::updateScoreDisplay(int score)
 {
-    char* s = new char[100];
-    sprintf(s, "分数:%d", score);
-    scoreDisplay->setPlainText(QString(s));
+    auto s = QString("%1").arg(score);
+    scoreDisplay->setX(-QFontMetricsF(scoreDisplay->font()).width(s)/2 + SCREEN_WIDTH/2);
+    scoreDisplay->setPlainText(s);
 }
 
 GameData GameScene::gatherInfomation()
@@ -144,6 +150,27 @@ void GameScene::birdPassed()
 void GameScene::handlePipePassed()
 {
     gapsAndPies.removeFirst();
+}
+
+void GameScene::initScoreDisplay()
+{
+    scoreDisplay = new QGraphicsTextItem;
+    addItem(scoreDisplay);
+    scoreDisplay->setDefaultTextColor(Qt::white);
+    scoreDisplay->setFont(QFont(QString("Microsoft YaHei"), 32, QFont::Bold));
+    auto w = QFontMetricsF(scoreDisplay->font()).width(QString("0"));
+    scoreDisplay->setPos(SCREEN_WIDTH / 2 - w / 2, ROOF);
+}
+
+QGraphicsTextItem* GameScene::putTextByCenterPos(QString s, QFont &f, qreal x, qreal y, QColor color)
+{
+    auto m = QFontMetricsF(f);
+    auto w = m.width(s);
+    auto h = m.height();
+    auto t = addText(s, f);
+    t->setPos(x - w / 2, y - h / 2);
+    t->setDefaultTextColor(color);
+    return t;
 }
 
 Bird *GameScene::bird() const

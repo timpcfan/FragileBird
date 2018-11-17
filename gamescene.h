@@ -47,10 +47,14 @@ public slots:
 
 private:
 
+    void initScoreDisplay();
+    QGraphicsTextItem *putTextByCenterPos(QString s, QFont& f, qreal x, qreal y, QColor color=Qt::white);
+
     QList<QPair<GameData::GapData, Pipe*>> gapsAndPies; // 保存还没消亡的所有裂缝信息
     Bird* mbird = nullptr;
     QGraphicsItemGroup* pipe_group = nullptr;
     QGraphicsTextItem* scoreDisplay;
+    QGraphicsTextItem* hintText;
 
     QImage* bgImage;
 };

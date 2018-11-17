@@ -3,5 +3,6 @@
         <file>images/bg_day.png</file>
         <file>images/bird1_0.png</file>
         <file>images/pipe_up.png</file>
+        <file>images/main.png</file>
     </qresource>
 </RCC>

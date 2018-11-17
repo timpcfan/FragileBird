@@ -57,7 +57,8 @@ void GameView::keyPressEvent(QKeyEvent *event)
             restart();
             break;
         }
-        gscene->bird()->jump();
+        if(isStart)
+            gscene->bird()->jump();
         break;
     case Qt::Key_A:
         isAutoPlay = true;
@@ -97,12 +98,13 @@ void GameView::startGame()
     isMainScreen = false;
     gscene->startHint();
     gscene->updateScoreDisplay(score);
+    pipeGenerateTimer->start(spawnInterval);
 }
 
 void GameView::stopGame()
 {
-    gscene->gameoverScreen(score);
     isStart = false;
+    gscene->gameoverScreen(score);
 }
 
 void GameView::addScore()
