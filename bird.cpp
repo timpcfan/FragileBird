@@ -12,6 +12,7 @@ Bird::Bird(qreal x, qreal y)
     setPos(x, y);
     birdPixmap = new QPixmap(":/new/images/images/bird1_0.png");
     setTransformOriginPoint(-BirdWidth * 0.35, 0); // 设置鸟的重心，旋转变换的中心点
+    isDie = false;
 }
 
 QRectF Bird::boundingRect() const
@@ -63,12 +64,22 @@ void Bird::advance(int phase)
         return;
     }
 
+    if(isDie)
+        return;
+
     // 碰撞检测
-    for(auto i : this->collidingItems())
-        if(typeid(*i) == typeid(Pipe))
+    for(auto i : this->collidingItems()){
+        if(typeid(*i) == typeid(Pipe)){
+            isDie = true;
             emit clashed();
-    if(y() > FLOOR - BirdHeight/2 || y() < ROOF + BirdHeight/2)
+            return;
+        }
+    }
+    if(y() > FLOOR - BirdHeight/2 || y() < ROOF + BirdHeight/2){
+        isDie = true;
         emit clashed();
+        return;
+    }
 
     // 计算经过的时间
     uint cur_time = QDateTime::currentDateTime().toMSecsSinceEpoch();

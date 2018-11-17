@@ -8,7 +8,6 @@ GameView::GameView(GameScene *gs) : QGraphicsView(gs)
     setCacheMode(QGraphicsView::CacheBackground);
     setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
     setWindowTitle(QString("Flappy Bird X"));
-    setWindowIcon(QIcon(":/new/images/images/bird1_0.png"));
     setFixedSize(355, 605);
 
     animateTimer = new QTimer(this);
