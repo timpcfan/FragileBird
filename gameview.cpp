@@ -8,7 +8,7 @@ GameView::GameView(GameScene *gs) : QGraphicsView(gs)
     setCacheMode(QGraphicsView::CacheBackground);
     setViewportUpdateMode(QGraphicsView::BoundingRectViewportUpdate);
     setWindowTitle(QString("易碎小鸟"));
-    resize(355, 605);
+    setFixedSize(355, 605);
 
     animateTimer = new QTimer(this);
     connect(animateTimer, SIGNAL(timeout()), this, SLOT(gameAdvance()));

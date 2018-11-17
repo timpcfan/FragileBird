@@ -8,7 +8,7 @@ GameScene::GameScene() : QGraphicsScene()
     pipe_group = new QGraphicsItemGroup;
     addItem(pipe_group);
 
-    initScoreDisplay();
+    initDisplay();
 
     bgImage = new QImage(":/new/images/images/bg_day.png");
 }
@@ -63,7 +63,7 @@ void GameScene::clear()
     QGraphicsScene::clear();
     pipe_group = new QGraphicsItemGroup;
     addItem(pipe_group);
-    initScoreDisplay();
+    initDisplay();
     gapsAndPies.clear();
 }
 
@@ -77,6 +77,7 @@ void GameScene::mainScreen()
 
 void GameScene::gameoverScreen(int score)
 {
+    disableHint();
     scoreDisplay->setVisible(false);
     auto fbig = QFont(QString("Microsoft YaHei"), 32, QFont::Bold);
     auto fmiddle = QFont(QString("Microsoft YaHei"), 26, QFont::Bold);
@@ -94,11 +95,10 @@ void GameScene::gameoverScreen(int score)
 
 void GameScene::startHint()
 {
+    hintText->setVisible(true);
     QTimer* tmpTimer = new QTimer();
     tmpTimer->setSingleShot(true);
-    auto f = QFont("Microsoft YaHei", 14, QFont::Normal);
-    hintText = putTextByCenterPos(QString("按空格键跳跃，躲避管道"), f, SCREEN_WIDTH / 2, 30, Qt::white);
-    connect(tmpTimer, SIGNAL(timeout()), hintText, SLOT(deleteLater()));
+    connect(tmpTimer, SIGNAL(timeout()), this, SLOT(disableHint()));
     connect(tmpTimer, SIGNAL(timeout()), tmpTimer, SLOT(deleteLater()));
     tmpTimer->start(2000);
 }
@@ -152,7 +152,12 @@ void GameScene::handlePipePassed()
     gapsAndPies.removeFirst();
 }
 
-void GameScene::initScoreDisplay()
+void GameScene::disableHint()
+{
+    hintText->setVisible(false);
+}
+
+void GameScene::initDisplay()
 {
     scoreDisplay = new QGraphicsTextItem;
     addItem(scoreDisplay);
@@ -160,6 +165,8 @@ void GameScene::initScoreDisplay()
     scoreDisplay->setFont(QFont(QString("Microsoft YaHei"), 32, QFont::Bold));
     auto w = QFontMetricsF(scoreDisplay->font()).width(QString("0"));
     scoreDisplay->setPos(SCREEN_WIDTH / 2 - w / 2, ROOF);
+    auto f = QFont("Microsoft YaHei", 14, QFont::Normal);
+    hintText = putTextByCenterPos(QString("按空格键跳跃，躲避管道"), f, SCREEN_WIDTH / 2, 30, Qt::white);
 }
 
 QGraphicsTextItem* GameScene::putTextByCenterPos(QString s, QFont &f, qreal x, qreal y, QColor color)

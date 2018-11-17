@@ -11,6 +11,7 @@ Bird::Bird(qreal x, qreal y)
 {
     setPos(x, y);
     birdPixmap = new QPixmap(":/new/images/images/bird1_0.png");
+    setTransformOriginPoint(-BirdWidth * 0.35, 0); // 设置鸟的重心，旋转变换的中心点
 }
 
 QRectF Bird::boundingRect() const
