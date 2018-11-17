@@ -61,6 +61,8 @@ void GameView::keyPressEvent(QKeyEvent *event)
             gscene->bird()->jump();
         break;
     case Qt::Key_A:
+        if(deadCount <= 3)
+            break;
         isAutoPlay = true;
         gscene->setAutoPlayTextVisable(true);
         break;

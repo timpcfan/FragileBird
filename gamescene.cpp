@@ -99,11 +99,18 @@ void GameScene::gameoverScreen(int score, bool showHint)
     putTextByCenterPos(s4, fsmall, SCREEN_WIDTH / 2, 250);
 
     if(showHint){
-        putTextByCenterPos(QString("游戏太难？"), ftiny, SCREEN_WIDTH / 2, 50, Qt::red);
-        putTextByCenterPos(QString("按A键试试 : )"), ftiny, SCREEN_WIDTH / 2, 73, Qt::red);
+        if(!isAutoPlay){
+            putTextByCenterPos(QString("游戏太难？"), ftiny, SCREEN_WIDTH / 2, 45, Qt::red);
+            putTextByCenterPos(QString("按A键试试 : )"), ftiny, SCREEN_WIDTH / 2, 68, Qt::red);
+        }else if(score > 10){
+            putTextByCenterPos(QString("觉得自己也能行？"), ftiny, SCREEN_WIDTH / 2, 45, Qt::red);
+            putTextByCenterPos(QString("按S键关闭AI辅助"), ftiny, SCREEN_WIDTH / 2, 68, Qt::red);
+        }else{
+            putTextByCenterPos(QString("AI代打的时候手不要乱动哦"), ftiny, SCREEN_WIDTH / 2, 45, Qt::red);
+        }
     }
-
 }
+
 
 void GameScene::startHint()
 {
