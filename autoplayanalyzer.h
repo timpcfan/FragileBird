@@ -22,7 +22,7 @@ public:
 
 private:
     const qreal alpha = 130;	//设置小鸟跳跃到管道之间的最短安全距离
-    const qreal beta = 35;	//设置管道的飞行的安全高度
+    const qreal beta = 31;	//设置管道的飞行的安全高度
     const qreal delta = 20;	//设置小鸟默认跳跃高度与间隙下沿的高度差
     const qreal dh = 30; //设置安全飞行高度区间 y1-y0
     const qreal lambda = 0.3; //设置均衡跳跃因子
